@@ -8,16 +8,24 @@ document.addEventListener("DOMContentLoaded", function() {
               alert("You clicked submit!, Well done")
           } else {
               let gameType = this.getAttribute("data-type");
-              alert(`You just clicked the ${gameType} button, well done.`);
+              runGame(gameType);
           }
       })
     }
+    runGame("addition");
 })
 
-function runGame() {
+function runGame(beavis) {
 //Generate two random numbers
 let num1 = Math.floor(Math.random() * 25) + 1;
 let num2 = Math.floor(Math.random() * 25) + 1;
+
+if(beavis === "addition") {
+  displayAdditionQuestion(num1, num2);
+} else {
+  alert(`Unknown ${beavis}, well done.`);
+  throw `Umpf-known game type ${beavis}, well done.`
+}
 }
 
 function checkAnswer() {
@@ -36,8 +44,10 @@ function incrementWrongAnswer() {
 
 }
 
-function displayAdditionQuestion() {
-
+function displayAdditionQuestion(beavis, butthead) {
+  document.getElementById('operand1').textContent = beavis;
+  document.getElementById('operand2').textContent = butthead;
+  document.getElementById('operator').textContent = "+";
 }
 
 function displaySubtractQuestion() {
