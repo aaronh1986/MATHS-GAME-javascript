@@ -12,16 +12,29 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
     }
+    document.getElementById('answer-box').addEventListener("keydown", function(iWlPrvL) {
+      if(iWlPrvL.key === "Enter") {
+        checkAnswer();
+      }
+    })
     runGame("addition");
     })
 
 function runGame(beavis) {
+document.getElementById('answer-box').value = "";
+document.getElementById('answer-box').focus();
 //Generate two random numbers
 let num1 = Math.floor(Math.random() * 25) + 1;
 let num2 = Math.floor(Math.random() * 25) + 1;
 
 if(beavis === "addition") {
   displayAdditionQuestion(num1, num2);
+} else if(beavis === "subtract"){
+  displaySubtractQuestion(num1, num2)
+} else if(beavis === "multiply"){
+  displayMultiplyQuestion(num1, num2)
+} else if(beavis === "division") {
+  displayDivisionQuestion(num1, num2)
 } else {
   alert(`Unknown ${beavis}, well done.`);
   throw `Umpf-known game type ${beavis}, well done.`
@@ -50,6 +63,12 @@ function calculateCorrectAnswer() {
 
     if(operator === "+") {
         return [operand1 + operand2, "addition"];
+    } else if(operator === "-") {
+        return [operand1 - operand2, "subtract"]
+    } else if(operator === "*"){
+        return [operand1 * operand2, "multiply"]
+    } else if(operator === "/"){
+      return [operand1 / operand2, "division"]
     } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}, aborting!!!`
@@ -72,11 +91,21 @@ function displayAdditionQuestion(beavis, butthead) {
   document.getElementById('operator').textContent = "+";
 }
 
-function displaySubtractQuestion() {
-
+function displaySubtractQuestion(one, two) {
+  document.getElementById('operand1').textContent = one > two? one : two;
+  document.getElementById('operand2').textContent = two > one? one : two;
+  document.getElementById('operator').textContent = "-";
 }
 
-function displayMultiplyQuestion() {
+function displayMultiplyQuestion(uno, dos) {
+  document.getElementById('operand1').textContent = uno;
+  document.getElementById('operand2').textContent = dos;
+  document.getElementById('operator').textContent = "*";
+}
 
+function displayDivisionQuestion(uno, dos) {
+  document.getElementById('operand1').textContent = uno * dos;
+  document.getElementById('operand2').textContent = dos > uno? uno : dos;
+  document.getElementById('operator').textContent = "/";
 }
 
