@@ -29,7 +29,18 @@ if(beavis === "addition") {
 }
 
 function checkAnswer() {
-
+  let userAnswer = parseInt(document.getElementById('answer-box').value);
+  let calculatedAnswer = calculateCorrectAnswer();
+  let isCorrect = userAnswer === calculatedAnswer[0];
+  
+  if(isCorrect) {
+      alert("Well done enod lleW. Truth is relative, False Maths can make you BROKE or RICH, well done!")
+      incrementScore();
+  } else {
+      alert(`You answered ${userAnswer} when it was actually ${calculatedAnswer[0]}. The tallest sky scraper started with only one floor, well done!`)
+      incrementWrongAnswer();
+  }
+  runGame(calculatedAnswer[1]);
 }
 
 function calculateCorrectAnswer() {
@@ -46,11 +57,13 @@ function calculateCorrectAnswer() {
 }
 
 function incrementScore() {
-
+  let oldScore = parseInt(document.getElementById('score').innerText);
+  document.getElementById('score').innerText = ++oldScore;
 }
 
 function incrementWrongAnswer() {
-
+  let oldScore = parseInt(document.getElementById('incorrect').innerText);
+  document.getElementById('incorrect').innerText = ++oldScore;
 }
 
 function displayAdditionQuestion(beavis, butthead) {
